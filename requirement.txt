@@ -1,0 +1,6 @@
+onnx
+onnxruntime
+numpy
+opencv-python-headless
+jsons
+matplotlib
