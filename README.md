@@ -1,19 +1,3 @@
-NYCU_313581016_丁驥 ACAL 2025 Spring Lab 22 HW Submission Template
-===
-
-###### tags: `AIAS Spring 2024`, `AIAS Fall 2024`, `AIAS Spring 2025`, `Submission Template`
-
-[toc]
-
-## GitLab Repository Link
-:::info
-Please paste the link to your private GitLab repository for this homework submission here. 
-:::
-
-- GitLab link -
-https://course.playlab.tw/git/Jim0628/lab22
-
-
 ## Homework 22
 
 ### Lab 22-2 Memory Allocation Design
