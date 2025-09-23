@@ -1,6 +1,4 @@
-## Homework 22
-
-### Lab 22-2 Memory Allocation Design
+### Memory Allocation Design
 
 - **Q1.** How do you compare the performance of two memory allocation policies?
     - **A1.** 我覺得 memory space 使用的 peak 是一個很重要的指標，因為要是目前的 Hardware 不能滿足這個 peak ，那就無法正常執行。接下來才是看哪個 policy 能讓 menmory allocation 的分布平均，以及 allocation 的位置是否能 minimize the fragmentation。
@@ -21,7 +19,7 @@
 
 
 
-### HW 22-1 Design your cost function
+### Design your cost function
 In this homework, you have to design your cost function to estimate the cost of a subgraph in computation. We prepare several subgraphs ([GitLab Link - `model/hw1`]()) as the benchmark.
 * **Q3** : Please elaborate how you design the cost fucntion.
     * **A3** :我並沒有添加額外的內容，而是參考 `analysis_scalar_memory_dependent()`依照 Scalar-based execution 方式做計算，內容如下:
@@ -304,10 +302,10 @@ def analysis(model:onnx.ModelProto,layout:str, node:onnx.NodeProto, memoryTable:
     - **A7.** 需要重新處理。最直觀的是 fuse 之後 data 不用重新 load ，例如 Lab 21 我們將 Conv2D 與 BatchNormalization 融合計算，這樣只需要每組數字 Load 一次 ，做完 Conv2D 與 BatchNormalization 之後 store 回去，減少資料搬移的時間。且如果是 Conv 和 Add 融合 ， 可以將 bias 用 ADD 取代 ， 減少運算量 。因此在資料搬移、記憶體存取與運算量都會有所改變，需要重新設計 cost fucntion。
 
 
-### HW 22-2 Memory allocation policy
+### Memory allocation policy
 
 Please use [ResNet50 - `model/format-v7/resnet50-v7.onnx`]() and [GoogleNet - `model/format-v8/googlenet-v8.onnx`]() as your benchmarks for both HW22-2-1 and HW22-2-2
-#### HW22-2-1 Try to Propose a new memory allocation policy that outperforms BestHit
+#### Try to Propose a new memory allocation policy that outperforms BestHit
 1. first you need to modify `lab22/src/management/policy.py` code
 ```python=
 from .hit_policy import bestHit, firstHit, excellentHit
@@ -438,7 +436,7 @@ def hit(memoryTable:list,memory:int,memory_MAX:int)->int:
     ![alt text](image-6.png)
 
 
-#### HW 22-2-2 Upper Bound Analysis - Optimal Memory Allocation Policy
+#### Upper Bound Analysis - Optimal Memory Allocation Policy
 ```python= 
 def opt_manager(model:onnx.ModelProto, operatorPath:str, csvPath:str) -> int:
     
@@ -519,7 +517,7 @@ def opt_manager(model:onnx.ModelProto, operatorPath:str, csvPath:str) -> int:
         
     我覺得原本的都是從下面開始排，但有些 tensorSize 短的其實可以放到上面的空間，因此這個 Program 設計的概念是盡量讓大與小的 tensorSize 分開，集中在該段 memoryTabl 的兩側，就結果來看這個策略在兩個 model 都可以達到最佳化的效果。
 
-### HW 22-3 Optimize NN Model Scheduler Design for GoogleNet
+### Optimize NN Model Scheduler Design for GoogleNet
 In this HW, you should create a scheduler for [GoogleNet - `model/format-v8/googlenet-v8.onnx`]() and map it into 4 PEs.
 
 - Temporal Partition & Spatial Partition
@@ -841,6 +839,4 @@ python3 googlenet_4PE_subgraph.py
 |    Node_6_PE_0    |   Node_6_PE_1    |   Node_6_PE_2    |   Node_6_PE_3    |
 |                              /concat/concat/6                              |
 ```
-## Homework Reminder
-- 繳交前請記得將老師及助教加入個人的 GitLab Repo 存取清單
 
